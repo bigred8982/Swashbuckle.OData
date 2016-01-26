@@ -23,7 +23,7 @@ namespace SwashbuckleODataSample
         public static void Register(HttpConfiguration config)
         {
             ConfigureWebApiOData(config);
-            ConfigureRestierOData(config);
+            //ConfigureRestierOData(config);
         }
 
         private static async void ConfigureRestierOData(HttpConfiguration config)
@@ -33,28 +33,28 @@ namespace SwashbuckleODataSample
 
         private static void ConfigureWebApiOData(HttpConfiguration config)
         {
-            var controllerSelector = new ODataVersionControllerSelector(config);
-            config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
+            //var controllerSelector = new ODataVersionControllerSelector(config);
+            //config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
-            // Define a versioned route
-            config.MapODataServiceRoute("V1RouteVersioning", "odata/v1", GetVersionedModel());
-            controllerSelector.RouteVersionSuffixMapping.Add("V1RouteVersioning", "V1");
+            //// Define a versioned route
+            //config.MapODataServiceRoute("V1RouteVersioning", "odata/v1", GetVersionedModel());
+            //controllerSelector.RouteVersionSuffixMapping.Add("V1RouteVersioning", "V1");
 
-            // Define a versioned route that doesn't map to any controller
-            config.MapODataServiceRoute("odata/v2", "odata/v2", GetFakeModel());
-            controllerSelector.RouteVersionSuffixMapping.Add("odata/v2", "V2");
+            //// Define a versioned route that doesn't map to any controller
+            //config.MapODataServiceRoute("odata/v2", "odata/v2", GetFakeModel());
+            //controllerSelector.RouteVersionSuffixMapping.Add("odata/v2", "V2");
 
-            // Define a custom route with custom routing conventions
-            var conventions = ODataRoutingConventions.CreateDefault();
-            conventions.Insert(0, new CustomNavigationPropertyRoutingConvention());
-            var customODataRoute = config.MapODataServiceRoute("CustomODataRoute", ODataRoutePrefix, GetCustomRouteModel(), batchHandler: null, pathHandler: new DefaultODataPathHandler(), routingConventions: conventions);
-            config.AddCustomSwaggerRoute(customODataRoute, "/Customers({Id})/Orders")
-                .Operation(HttpMethod.Post)
-                .PathParameter<int>("Id")
-                .BodyParameter<Order>("order");
+            //// Define a custom route with custom routing conventions
+            //var conventions = ODataRoutingConventions.CreateDefault();
+            //conventions.Insert(0, new CustomNavigationPropertyRoutingConvention());
+            //var customODataRoute = config.MapODataServiceRoute("CustomODataRoute", ODataRoutePrefix, GetCustomRouteModel(), batchHandler: null, pathHandler: new DefaultODataPathHandler(), routingConventions: conventions);
+            //config.AddCustomSwaggerRoute(customODataRoute, "/Customers({Id})/Orders")
+            //    .Operation(HttpMethod.Post)
+            //    .PathParameter<int>("Id")
+            //    .BodyParameter<Order>("order");
 
-            // Define a route to a controller class that contains functions
-            config.MapODataServiceRoute("FunctionsODataRoute", ODataRoutePrefix, GetFunctionsEdmModel());
+            //// Define a route to a controller class that contains functions
+            //config.MapODataServiceRoute("FunctionsODataRoute", ODataRoutePrefix, GetFunctionsEdmModel());
 
             // Define a default non- versioned route(default route should be at the end as a last catch-all)
             config.MapODataServiceRoute("DefaultODataRoute", ODataRoutePrefix, GetDefaultModel());
@@ -65,6 +65,7 @@ namespace SwashbuckleODataSample
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Customer>("Customers");
             builder.EntitySet<Order>("Orders");
+            builder.EnableLowerCamelCase();
             return builder.GetEdmModel();
         }
 
