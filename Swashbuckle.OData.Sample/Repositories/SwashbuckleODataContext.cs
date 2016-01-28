@@ -37,9 +37,9 @@ namespace SwashbuckleODataSample.Repositories
             context.Projects.Add(new Project { ProjectName = "ProjectOne", Client = clientOne});
             context.Projects.Add(new Project { ProjectName = "ProjectTwo", Client = clientOne});
 
-            var customerOne = new Customer { Name = "CustomerOne" };
+            var customerOne = new Customer { Name = "CustomerOne", Id=10, _privateIdentifier="1254-4343", _tenantKey="client1" };
             context.Customers.Add(customerOne);
-            context.Customers.Add(new Customer { Name = "CustomerTwo" });
+            context.Customers.Add(new Customer { Name = "CustomerTwo", Id = 11, _privateIdentifier = "9872-0003", _tenantKey = "client1" });
 
             context.Orders.Add(new Order { OrderId = SequentialGuidGenerator.Generate(SequentialGuidType.SequentialAtEnd), OrderName = "OrderOne", Customer = customerOne, UnitPrice = 4.0 });
             context.Orders.Add(new Order { OrderId = SequentialGuidGenerator.Generate(SequentialGuidType.SequentialAtEnd), OrderName = "OrderTwo", Customer = customerOne, UnitPrice = 3.5 });

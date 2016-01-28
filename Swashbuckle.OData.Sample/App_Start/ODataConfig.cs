@@ -66,6 +66,12 @@ namespace SwashbuckleODataSample
             builder.EnableLowerCamelCase();
 
             builder.EntitySet<Customer>("Customers");
+            
+            // ignore private properties
+            builder.EntityType<Customer>().Ignore(c => c._tenantKey);
+            builder.EntityType<Customer>().Ignore(c => c._privateIdentifier);
+
+
             builder.EntitySet<Order>("Orders");
 
             return builder.GetEdmModel();

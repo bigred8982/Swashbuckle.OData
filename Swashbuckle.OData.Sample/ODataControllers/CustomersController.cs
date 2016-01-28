@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 using System.Web.OData;
 using SwashbuckleODataSample.Models;
 using SwashbuckleODataSample.Repositories;
+using System.Collections.Generic;
 
 namespace SwashbuckleODataSample.ODataControllers
 {
@@ -21,7 +22,14 @@ namespace SwashbuckleODataSample.ODataControllers
         [EnableQuery]
         public IQueryable<Customer> GetCustomers()
         {
-            return _db.Customers;
+            //return _db.Customers;
+            // pure mock data
+            return new List<Customer>
+            {
+              new Customer { Name = "CustomerOne", Id = 10, _privateIdentifier = "1254-4343", _tenantKey = "client1" },
+              new Customer { Name = "CustomerTwo", Id = 11, _privateIdentifier = "9872-0003", _tenantKey = "client1" },
+              new Customer { Name = "CustomerThree", Id = 12, _privateIdentifier = "3333-0106", _tenantKey = "client2" }
+            }.AsQueryable();            
         }
 
         /// <summary>
