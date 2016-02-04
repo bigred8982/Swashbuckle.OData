@@ -146,7 +146,9 @@
     <Compile Include="DocumentFilters\ApplyResourceDocumentation.cs" />
     <Compile Include="Models\MyEnum.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ToolHistory.cs" />
     <Compile Include="ODataControllers\ProductsController.cs" />
+    <Compile Include="ODataControllers\ToolHistoriesController.cs" />
     <Compile Include="Repositories\RestierODataContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Customer.cs" />
