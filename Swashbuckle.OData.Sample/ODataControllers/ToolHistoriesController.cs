@@ -10,22 +10,26 @@ using System.Web.OData.Routing;
 
 namespace SwashbuckleODataSample.ODataControllers
 {
-  public class ToolHistoriesController : ODataController
-  {
-    [EnableQuery]
-    public IHttpActionResult Get([FromODataUri] int key)
+    public class ToolHistoriesController : ODataController
     {
-      throw new NotImplementedException();
-    }
+        [EnableQuery]
+        public IHttpActionResult Get()
+        {
+            throw new NotImplementedException();
+        }
 
-    [EnableQuery]
-    //[ODataRoute("ToolHistories(Code={code})")]
+        [EnableQuery]
+        public IHttpActionResult Get([FromODataUri] int key)
+        {
+            throw new NotImplementedException();
+        }
 
-    [ODataRoute("ToolHistories({code})")]
-    [ResponseType(typeof(ToolHistory))]
-    public IHttpActionResult GetByCode([FromODataUri] string code)
-    {
-      throw new NotImplementedException();
+        [EnableQuery]
+        [ODataRoute("ToolHistories({code})")]
+        //[ResponseType(typeof(ToolHistory))]
+        public IHttpActionResult GetByCode([FromODataUri] string code)
+        {
+            throw new NotImplementedException();
+        }
     }
-  }
 }
